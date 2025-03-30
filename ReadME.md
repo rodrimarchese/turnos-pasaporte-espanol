@@ -2,6 +2,8 @@
 
 Este proyecto automatiza la verificación de la próxima fecha de apertura para solicitar pasaportes españoles en Argentina y envía una notificación por email si hay una nueva fecha disponible.
 
+[![Verificación automática](https://github.com/rodrimarchese/turnos-pasaporte-espanol/actions/workflows/check-turnos.yml/badge.svg)](https://github.com/rodrimarchese/turnos-pasaporte-espanol/actions)
+
 ---
 
 ## 🚀 Requisitos
