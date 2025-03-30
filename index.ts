@@ -1,7 +1,14 @@
 import { isAfter, parse } from "@formkit/tempo";
 import { webkit } from "playwright";
+import { existsSync } from "fs";
 
-process.loadEnvFile();
+if (existsSync(".env")) {
+  // Solo en local
+  process.loadEnvFile();
+  console.log("✅ Variables de entorno cargadas desde .env");
+} else {
+  console.log("✅ Variables de entorno cargadas desde el entorno");
+}
 
 async function checkPasaporteDate() {
   try {
