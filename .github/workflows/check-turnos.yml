@@ -27,6 +27,19 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libxcomposite1 \
+            libxdamage1 libxrandr2 libgbm1 libasound2 libpangocairo-1.0-0 libgtk-3-0 \
+            libgtk-4-1 libgraphene-1.0-0 libwoff2dec0 libvpx7 libopus0 \
+            libgstallocators-1.0-0 libgstapp-1.0-0 libgstbase-1.0-0 libgstpbutils-1.0-0 \
+            libgstaudio-1.0-0 libgstgl-1.0-0 libgsttag-1.0-0 libgstvideo-1.0-0 \
+            libgstcodecparsers-1.0-0 libgstfft-1.0-0 libflite1 libwebpdemux2 \
+            libavif15 libharfbuzz-icu0 libwebpmux3 libenchant-2-2 libsecret-1-0 \
+            libhyphen0 libmanette-0.2-0 libpsl5 libnghttp2-14 libgles2 libx264-164
+
       - name: Install Playwright Browsers
         run: pnpm exec playwright install
 
