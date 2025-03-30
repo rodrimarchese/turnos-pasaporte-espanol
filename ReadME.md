@@ -157,3 +157,7 @@ Desarrollado por [Rodri Marchese](https://github.com/rodrimarchese) para automat
 ## ⭐️ Licencia
 
 Este proyecto es open source bajo la licencia MIT. Puedes usarlo y adaptarlo libremente.
+
+## 🤝 Contribuciones
+
+Si querés colaborar con este proyecto, podés leer las guías y sugerencias en el archivo [CONTRIBUTING.md](./CONTRIBUTING.md).
