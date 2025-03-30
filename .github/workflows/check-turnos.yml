@@ -11,23 +11,26 @@ jobs:
   check-turnos:
     runs-on: ubuntu-latest
     steps:
-      - name: 🛎️ Checkout repo
-        uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-      - name: 🟢 Setup PNPM
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+
+      - name: Setup PNPM
         uses: pnpm/action-setup@v2
         with:
           version: 10.7.0
 
-      - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: 📥 Install dependencies
+      - name: Install dependencies
         run: pnpm install
 
-      - name: 🔄 Ejecutar script
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install
+
+      - name: Ejecutar script
         run: pnpm start
         env:
           MJ_PUBLIC_KEY: ${{ secrets.MJ_PUBLIC_KEY }}
