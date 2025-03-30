@@ -1,0 +1,26 @@
+{
+  "name": "turnos-pasaporte-espanol",
+  "version": "1.0.0",
+  "description": "A project to automate the process of looking for an existing date of appointment for a Spanish passport using Playwright.",
+  "main": "index.ts",
+  "packageManager": "pnpm@10.7.0",
+  "scripts": {
+    "start": "ts-node index.ts",
+    "build": "tsc",
+    "setup": "pnpm install && pnpm exec playwright install",
+    "docker": "docker compose up -d",
+    "docker:test": "docker run --rm --env-file .env turnos-pasaporte node dist/index.js"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "dependencies": {
+    "@formkit/tempo": "^0.1.2",
+    "playwright": "^1.51.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.14",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  }
+}

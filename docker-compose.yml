@@ -1,0 +1,9 @@
+services:
+  turnos-pasaporte:
+    build:
+      context: .
+    image: turnos-pasaporte
+    container_name: turnos-pasaporte
+    restart: always
+    env_file:
+      - .env
