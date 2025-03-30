@@ -1,0 +1,38 @@
+name: 📅 Check Turnos Pasaporte
+
+on:
+  schedule:
+    # Todos los días (UTC)
+    - cron: "0 11 * * *"
+    - cron: "0 17 * * *"
+  workflow_dispatch:
+
+jobs:
+  check-turnos:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛎️ Checkout repo
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10.7.0
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: 📥 Install dependencies
+        run: pnpm install
+
+      - name: 🔄 Ejecutar script
+        run: pnpm start
+        env:
+          MJ_PUBLIC_KEY: ${{ secrets.MJ_PUBLIC_KEY }}
+          MJ_SECRET_KEY: ${{ secrets.MJ_SECRET_KEY }}
+          MJ_FROM_EMAIL: ${{ secrets.MJ_FROM_EMAIL }}
+          MJ_FROM_NAME: ${{ secrets.MJ_FROM_NAME }}
+          MJ_TO_EMAIL: ${{ secrets.MJ_TO_EMAIL }}
+          MJ_TO_NAME: ${{ secrets.MJ_TO_NAME }}
