@@ -51,6 +51,8 @@ async function checkPasaporteDate() {
           continue;
         }
 
+        parsedDate = nextDateText;
+
         console.log(`✅ Próxima apertura: ${parsedDate}`);
 
         if (isAfter(parsedDate, new Date())) {
