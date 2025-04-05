@@ -28,12 +28,28 @@ async function checkPasaporteDate() {
 
       if (servicio.includes("renovación y primera vez")) {
         const nextDateText = await row.locator("td:nth-child(3)").innerText();
+
+        // Verificar si el texto tiene el formato esperado de fecha (DD/MM/YYYY HH:mm)
+        const dateRegex = /^\d{2}\/\d{2}\/\d{4}\s\d{2}:\d{2}$/;
+        if (!dateRegex.test(nextDateText.replace(" hs", "").trim())) {
+          console.log(
+            `❌ El texto "${nextDateText}" no tiene el formato de fecha esperado`
+          );
+          continue;
+        }
+
         const nextDateTextClean = nextDateText.replace(" hs", "").trim();
         const [date, time] = nextDateTextClean.split(" ");
-        const parsedDate = parse(
-          `${date} ${time} -03:00`,
-          "DD/MM/YYYY HH:mm Z"
-        );
+
+        let parsedDate;
+        try {
+          parsedDate = parse(`${date} ${time} -03:00`, "DD/MM/YYYY HH:mm Z");
+        } catch (error: any) {
+          console.log(
+            `❌ Error al parsear la fecha "${nextDateTextClean}": ${error.message}`
+          );
+          continue;
+        }
 
         console.log(`✅ Próxima apertura: ${parsedDate}`);
 
