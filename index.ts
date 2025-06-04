@@ -28,18 +28,25 @@ async function checkPasaporteDate() {
 
       if (servicio.includes("renovación y primera vez")) {
         const nextDateText = await row.locator("td:nth-child(3)").innerText();
+        const nextDateTextClean = nextDateText.replace(" hs", "").trim();
 
-        // Verificar si el texto tiene el formato esperado de fecha (DD/MM/YYYY HH:mm)
+        // Verificar si el texto tiene el formato esperado de fecha (DD/MM/YYYY HH:mm) ó un formato asi: 29/05/2025 a las 08:45
         const dateRegex = /^\d{2}\/\d{2}\/\d{4}\s\d{2}:\d{2}$/;
-        if (!dateRegex.test(nextDateText.replace(" hs", "").trim())) {
+        const dateRegex2 = /^\d{2}\/\d{2}\/\d{4}\sa\slas\s\d{2}:\d{2}$/;
+
+        let date, time;
+        if (dateRegex.test(nextDateTextClean)) {
+          [date, time] = nextDateTextClean.split(" ");
+        } else if (dateRegex2.test(nextDateTextClean)) {
+          const parts = nextDateTextClean.split(" a las ");
+          date = parts[0];
+          time = parts[1];
+        } else {
           console.log(
             `❌ El texto "${nextDateText}" no tiene el formato de fecha esperado`
           );
           continue;
         }
-
-        const nextDateTextClean = nextDateText.replace(" hs", "").trim();
-        const [date, time] = nextDateTextClean.split(" ");
 
         let parsedDate;
         try {
@@ -50,8 +57,6 @@ async function checkPasaporteDate() {
           );
           continue;
         }
-
-        parsedDate = nextDateText;
 
         console.log(`✅ Próxima apertura: ${parsedDate}`);
 
